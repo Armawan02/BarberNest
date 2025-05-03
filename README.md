@@ -60,16 +60,44 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
 
-<h3>BarberNest : Platform Booking dan Manajemen Layanan Barbershop</h3>
+<h2>BarberNest : Platform Booking dan Manajemen Layanan Barbershop</h2>
 <br>
 <p>
 <b>BarberNest</b> adalah platform web modern untuk layanan barbershop yang mendukung sistem multi-cabang, manajemen jadwal, booking online, dan layanan home service. Web ini dirancang untuk mempermudah pelanggan dalam memesan layanan potong rambut dari lokasi manapun, sekaligus membantu manajemen barbershop dalam mengatur operasional, pegawai, dan transaksi.
 </p>
 <br>
-<h4>Fitur  Tampilan Utama Web</h4>
-<ul>Beranda</ul>
-<ul>Layanan</ul>
-<ul>Cabang</ul>
-<ul>Tentang Kami</ul>
-<ul>Login/Daftar</ul>
-
+<h3>NavBar & Halaman Utama per Role</h3>
+<br>
+<h4>belum login</h4>
+<ul>Beranda : di dalam beranda ada tampilan atau tombol atau apalah <b>booking sekarang</b> dan beralih ke halaman login,</ul>
+<ul>Layanan : di dalam ada beberapa layanan, misal cukur rambut, pewarnaan rambut, dan home service/pelayanan ke rumah</ul>
+<ul>Cabang : di dalam ada beberapa cabang misal nama cabang "BarberNest : Tinambung" </ul>
+<ul>Tentang Kami : tentang website ini plus profile pembuatnya ea</ul>
+<ul>Login/Daftar : untuk login sebagai admin, barber, dan codtumer tapi costumer harus daftar dulu</ul>
+<br>
+<h4>Tampilan Costumer setelah login</h4>
+<ul>Beranda : ada tombol atau apalah untuk otomatis menuju ke tampilan booking</ul>
+<ul>Layanan : berisi tampilan untuk memilih layanan => pangkas rambut, hair coloring, rebonding, ferming, dan home services dan ketika di klik salah satunya akan otomatis ke tampilan booking </ul>
+<ul>booking : berisi form untuk pilih => cabang, barber, layanan, jadwal metode pembayaran</ul>
+<ul>riwayat : berisi status sudah proses atau sudah di terima oleh barber dan selesai jika sudah selesai</ul>
+<ul>profil  : berisi tampilan bio dan info cosumer</ul>
+<ul>logout</ul>
+<br>
+<h4>Tampilan Barber setelah login</h4>
+<ul>Beranda : berisi tampilan untuk menuju ke jadwal atau ke halaman yang di booking costumer</ul>
+<ul>Jadwal saya : berisi tampilan riwayat pelanggan yang membooking atau memilih home service</ul>
+<ul>Tranksaksi : berisi tranksaksi untuk memvalidasi pembayaran costumer</ul>
+<ul>Profil</ul>
+<br>
+<h4>Tampilan Admin setelah login</h4>
+<ul>Beranda : taampilan total pendapatan, total booking, layanan terlaris</ul>
+<ul>Kelola User</ul>
+<ul>Kelola Cabang</ul>
+<ul>Kelola Barber</ul>
+<ul>Kelola Layanan</ul>
+<ul>Kelola Booking</ul>
+<ul>Kelola Tranksaksi</ul>
+<ul>logout</ul>
+<br>
+<h4>Use Case Multirole</h4>
+<img src="C:\laragon\www\BarberNest\public\img\BarberNest.drawio.png" alt="Deskripsi gambar" width="300" height="200">
