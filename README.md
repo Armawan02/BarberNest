@@ -100,4 +100,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <ul>logout</ul>
 <br>
 <h4>Use Case Multirole</h4>
-[Diagram Use Case]
+<a href="https://drive.google.com/file/d/1sGajqAvbnBr5xD5BzpUWdD_ZmlZpxrul/view?usp=sharing">Lihat diagram di Google Drive</a>
