@@ -60,4 +60,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
 
-<h1>Barber Nest</h1>
+<h1 color="red">Barber Nest</h1>
