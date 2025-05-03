@@ -100,4 +100,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <ul>logout</ul>
 <br>
 <h4>Use Case Multirole</h4>
-<img src="C:\laragon\www\BarberNest\public\img\BarberNest.drawio.png" alt="Deskripsi gambar" width="300" height="200">
+<img src="img\BarberNest.drawio.png" alt="Use Case Diagram" width="300" height="200">
