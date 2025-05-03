@@ -60,4 +60,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
 
-<h1 color="red">Barber Nest</h1>
+<h3>BarberNest : Platform Booking dan Manajemen Layanan Barbershop</h3>
+<br>
+<p>
+<b>BarberNest</b> adalah platform web modern untuk layanan barbershop yang mendukung sistem multi-cabang, manajemen jadwal, booking online, dan layanan home service. Web ini dirancang untuk mempermudah pelanggan dalam memesan layanan potong rambut dari lokasi manapun, sekaligus membantu manajemen barbershop dalam mengatur operasional, pegawai, dan transaksi.
+</p>
+<br>
+<h4>Fitur  Tampilan Utama Web</h4>
+<ul>Beranda</ul>
+<ul>Layanan</ul>
+<ul>Cabang</ul>
+<ul>Tentang Kami</ul>
+<ul>Login/Daftar</ul>
+
