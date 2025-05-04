@@ -119,34 +119,184 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## 🧑‍💼 1. Admin
 
-| Fitur                | Deskripsi                                                                 |
-|----------------------|--------------------------------------------------------------------------|
-| Kelola Data Pengguna | Menambah, mengubah, dan menghapus user dengan peran (admin, barber, customer). |
-| Kelola Data Cabang   | Mengatur informasi cabang barbershop (alamat, jam buka, dsb).           |
+| Fitur                | Deskripsi                                                                       |
+| -------------------- | ------------------------------------------------------------------------------- |
+| Kelola Data Pengguna | Menambah, mengubah, dan menghapus user dengan peran (admin, barber, customer).  |
+| Kelola Data Cabang   | Mengatur informasi cabang barbershop (alamat, jam buka, dsb).                   |
 | Kelola Data Layanan  | Menambah, mengedit, dan menghapus layanan seperti potong rambut, hair spa, dll. |
-| Kelola Booking       | Melihat semua data booking yang masuk dari customer dan statusnya.      |
-| Kelola Transaksi     | Melihat dan mengelola data transaksi pembayaran dari customer.          |
-
+| Kelola Booking       | Melihat semua data booking yang masuk dari customer dan statusnya.              |
+| Kelola Transaksi     | Melihat dan mengelola data transaksi pembayaran dari customer.                  |
 
 ## 💈 2. Barber
 
-| Fitur                   | Deskripsi                                                                 |
-|-------------------------|--------------------------------------------------------------------------|
-| Melihat Daftar Booking  | Menampilkan daftar booking yang dialokasikan ke barber tersebut.        |
-| Konfirmasi Booking      | Menerima atau menolak permintaan booking dari customer.                 |
-| Mengatur Status Booking | Menandai status booking: *menunggu, diproses, selesai, dibatalkan*, dll. |
-
+| Fitur                   | Deskripsi                                                                |
+| ----------------------- | ------------------------------------------------------------------------ |
+| Melihat Daftar Booking  | Menampilkan daftar booking yang dialokasikan ke barber tersebut.         |
+| Konfirmasi Booking      | Menerima atau menolak permintaan booking dari customer.                  |
+| Mengatur Status Booking | Menandai status booking: _menunggu, diproses, selesai, dibatalkan_, dll. |
 
 ## 👤 3. Customer
 
-| Fitur                                   | Deskripsi                                                                 |
-|----------------------------------------|--------------------------------------------------------------------------|
-| Melihat & Memilih Cabang               | Menampilkan daftar cabang yang tersedia untuk dipilih.                  |
-| Melihat & Memilih Layanan              | Menampilkan layanan (e.g. potong rambut, shaving, dsb) yang tersedia.   |
-| Melihat & Memilih Barber               | Memilih barber yang tersedia dari cabang yang dipilih.                  |
-| Melihat & Memilih Jadwal               | Menentukan tanggal dan waktu booking.                                   |
-| Memilih Metode Pembayaran              | Pilihan pembayaran langsung (tunai) atau metode lain jika tersedia.     |
-| Memilih Jenis Layanan (Tempat/Home)    | Menentukan apakah akan datang ke barbershop atau minta home service.    |
-| Melihat Riwayat Booking                | Melihat daftar booking sebelumnya dan status verifikasi dari barber.    |
+| Fitur                               | Deskripsi                                                              |
+| ----------------------------------- | ---------------------------------------------------------------------- |
+| Melihat & Memilih Cabang            | Menampilkan daftar cabang yang tersedia untuk dipilih.                 |
+| Melihat & Memilih Layanan           | Menampilkan layanan (potong rambut, hair coloring, dsb) yang tersedia. |
+| Melihat & Memilih Barber            | Memilih barber yang tersedia dari cabang yang dipilih.                 |
+| Melihat & Memilih Jadwal            | Menentukan tanggal dan waktu booking.                                  |
+| Memilih Metode Pembayaran           | Pilihan pembayaran langsung (tunai) atau metode lain jika tersedia.    |
+| Memilih Jenis Layanan (Tempat/Home) | Menentukan apakah akan datang ke barbershop atau minta home service.   |
+| Melihat Riwayat Booking             | Melihat daftar booking sebelumnya dan status verifikasi dari barber.   |
 
+<br>
 
+<h3>Tabel-tabel database beserta field dan tipe datanya</h3>
+<br>
+
+### 1. `users`
+
+| Field      | Tipe Data                         | Keterangan            |
+| ---------- | --------------------------------- | --------------------- |
+| id         | BIGINT UNSIGNED AI                | Primary key           |
+| name       | VARCHAR(100)                      | Nama lengkap user     |
+| email      | VARCHAR(150) UNIQUE               | Email user (unik)     |
+| password   | VARCHAR(255)                      | Password (hashed)     |
+| role       | ENUM(‘admin’,‘barber’,‘customer’) | Role/user type        |
+| phone      | VARCHAR(20) NULL                  | Nomor telepon         |
+| created_at | TIMESTAMP                         | Waktu dibuat          |
+| updated_at | TIMESTAMP                         | Waktu terakhir diubah |
+
+---
+
+### 2. `branches`
+
+| Field      | Tipe Data          | Keterangan            |
+| ---------- | ------------------ | --------------------- |
+| id         | BIGINT UNSIGNED AI | Primary key           |
+| name       | VARCHAR(100)       | Nama cabang           |
+| address    | TEXT               | Alamat lengkap cabang |
+| city       | VARCHAR(100)       | Kota cabang           |
+| created_at | TIMESTAMP          | Waktu dibuat          |
+| updated_at | TIMESTAMP          | Waktu terakhir diubah |
+
+---
+
+### 3. `services`
+
+| Field       | Tipe Data          | Keterangan             |
+| ----------- | ------------------ | ---------------------- |
+| id          | BIGINT UNSIGNED AI | Primary key            |
+| name        | VARCHAR(100)       | Nama layanan           |
+| description | TEXT NULL          | Deskripsi layanan      |
+| price       | DECIMAL(10,2)      | Harga layanan          |
+| duration    | INT                | Durasi layanan (menit) |
+| created_at  | TIMESTAMP          | Waktu dibuat           |
+| updated_at  | TIMESTAMP          | Waktu terakhir diubah  |
+
+---
+
+### 4. `bookings`
+
+| Field          | Tipe Data                                                         | Keterangan                                             |
+| -------------- | ----------------------------------------------------------------- | ------------------------------------------------------ |
+| id             | BIGINT UNSIGNED AI                                                | Primary key                                            |
+| user_id        | BIGINT UNSIGNED                                                   | FK → `users.id` (customer)                             |
+| branch_id      | BIGINT UNSIGNED                                                   | FK → `branches.id`                                     |
+| service_id     | BIGINT UNSIGNED                                                   | FK → `services.id`                                     |
+| barber_id      | BIGINT UNSIGNED                                                   | FK → `users.id` (role = barber)                        |
+| scheduled_at   | DATETIME                                                          | Tanggal & waktu booking                                |
+| service_method | ENUM(‘barber’,‘home’)                                             | Metode layanan: di tempat (`barber`) atau home service |
+| location       | TEXT NULL                                                         | Alamat home service (jika `service_method = home`)     |
+| status         | ENUM(‘pending’,‘confirmed’,‘in_progress’,‘completed’,‘cancelled’) | Status booking                                         |
+| created_at     | TIMESTAMP                                                         | Waktu dibuat                                           |
+| updated_at     | TIMESTAMP                                                         | Waktu terakhir diubah                                  |
+
+---
+
+### 5. `transactions`
+
+| Field          | Tipe Data                       | Keterangan                                    |
+| -------------- | ------------------------------- | --------------------------------------------- |
+| id             | BIGINT UNSIGNED AI              | Primary key                                   |
+| booking_id     | BIGINT UNSIGNED                 | FK → `bookings.id`                            |
+| amount         | DECIMAL(12,2)                   | Total bayar (termasuk biaya layanan & ongkir) |
+| payment_method | VARCHAR(50)                     | Metode pembayaran (cash, online, dll.)        |
+| payment_status | ENUM(‘pending’,‘paid’,‘failed’) | Status pembayaran                             |
+| paid_at        | TIMESTAMP NULL                  | Waktu pembayaran selesai                      |
+| created_at     | TIMESTAMP                       | Waktu dibuat                                  |
+| updated_at     | TIMESTAMP                       | Waktu terakhir diubah                         |
+
+<h3>Jenis relasi dan tabel yang berelasi</h3>
+<br>
+
+### 1. `users`
+
+| Field      | Tipe Data                         | Keterangan            |
+| ---------- | --------------------------------- | --------------------- |
+| id         | BIGINT UNSIGNED AI                | Primary key           |
+| name       | VARCHAR(100)                      | Nama lengkap user     |
+| email      | VARCHAR(150) UNIQUE               | Email user (unik)     |
+| password   | VARCHAR(255)                      | Password (hashed)     |
+| role       | ENUM(‘admin’,‘barber’,‘customer’) | Role/user type        |
+| phone      | VARCHAR(20) NULL                  | Nomor telepon         |
+| created_at | TIMESTAMP                         | Waktu dibuat          |
+| updated_at | TIMESTAMP                         | Waktu terakhir diubah |
+
+---
+
+### 2. `branches`
+
+| Field      | Tipe Data          | Keterangan            |
+| ---------- | ------------------ | --------------------- |
+| id         | BIGINT UNSIGNED AI | Primary key           |
+| name       | VARCHAR(100)       | Nama cabang           |
+| address    | TEXT               | Alamat lengkap cabang |
+| city       | VARCHAR(100)       | Kota cabang           |
+| created_at | TIMESTAMP          | Waktu dibuat          |
+| updated_at | TIMESTAMP          | Waktu terakhir diubah |
+
+---
+
+### 3. `services`
+
+| Field       | Tipe Data          | Keterangan             |
+| ----------- | ------------------ | ---------------------- |
+| id          | BIGINT UNSIGNED AI | Primary key            |
+| name        | VARCHAR(100)       | Nama layanan           |
+| description | TEXT NULL          | Deskripsi layanan      |
+| price       | DECIMAL(10,2)      | Harga layanan          |
+| duration    | INT                | Durasi layanan (menit) |
+| created_at  | TIMESTAMP          | Waktu dibuat           |
+| updated_at  | TIMESTAMP          | Waktu terakhir diubah  |
+
+---
+
+### 4. `bookings`
+
+| Field          | Tipe Data                                                         | Keterangan                                             |
+| -------------- | ----------------------------------------------------------------- | ------------------------------------------------------ |
+| id             | BIGINT UNSIGNED AI                                                | Primary key                                            |
+| user_id        | BIGINT UNSIGNED                                                   | FK → `users.id` (customer)                             |
+| branch_id      | BIGINT UNSIGNED                                                   | FK → `branches.id`                                     |
+| service_id     | BIGINT UNSIGNED                                                   | FK → `services.id`                                     |
+| barber_id      | BIGINT UNSIGNED                                                   | FK → `users.id` (role = barber)                        |
+| scheduled_at   | DATETIME                                                          | Tanggal & waktu booking                                |
+| service_method | ENUM(‘barber’,‘home’)                                             | Metode layanan: di tempat (`barber`) atau home service |
+| location       | TEXT NULL                                                         | Alamat home service (jika `service_method = home`)     |
+| status         | ENUM(‘pending’,‘confirmed’,‘in_progress’,‘completed’,‘cancelled’) | Status booking                                         |
+| created_at     | TIMESTAMP                                                         | Waktu dibuat                                           |
+| updated_at     | TIMESTAMP                                                         | Waktu terakhir diubah                                  |
+
+---
+
+### 5. `transactions`
+
+| Field          | Tipe Data                       | Keterangan                                    |
+| -------------- | ------------------------------- | --------------------------------------------- |
+| id             | BIGINT UNSIGNED AI              | Primary key                                   |
+| booking_id     | BIGINT UNSIGNED                 | FK → `bookings.id`                            |
+| amount         | DECIMAL(12,2)                   | Total bayar (termasuk biaya layanan & ongkir) |
+| payment_method | VARCHAR(50)                     | Metode pembayaran (cash, online, dll.)        |
+| payment_status | ENUM(‘pending’,‘paid’,‘failed’) | Status pembayaran                             |
+| paid_at        | TIMESTAMP NULL                  | Waktu pembayaran selesai                      |
+| created_at     | TIMESTAMP                       | Waktu dibuat                                  |
+| updated_at     | TIMESTAMP                       | Waktu terakhir diubah                         |
