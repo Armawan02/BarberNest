@@ -102,9 +102,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <h4>Use Case Multirole</h4>
 <a href="https://drive.google.com/file/d/1sGajqAvbnBr5xD5BzpUWdD_ZmlZpxrul/view?usp=sharing">Lihat diagram di Google Drive</a> -->
 <h1 align="center">BarberNest</h1>
-<h2>Platform Booking dan Manajemen Layanan Barbershop</h2>
 <br>
-<h3 align="center"></h3>
+<h3 align="center">Platform Booking dan Manajemen Layanan Barbershop</h3>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/3e809a21-1b25-4ef9-8e78-3bc97377b749" alt="Logo unsulbar" width="200"/>
 </p>
@@ -117,4 +116,37 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 </p>
 
 <h3>Role dan Fitur</h3>
+
+## 🧑‍💼 1. Admin
+
+| Fitur                | Deskripsi                                                                 |
+|----------------------|--------------------------------------------------------------------------|
+| Kelola Data Pengguna | Menambah, mengubah, dan menghapus user dengan peran (admin, barber, customer). |
+| Kelola Data Cabang   | Mengatur informasi cabang barbershop (alamat, jam buka, dsb).           |
+| Kelola Data Layanan  | Menambah, mengedit, dan menghapus layanan seperti potong rambut, hair spa, dll. |
+| Kelola Booking       | Melihat semua data booking yang masuk dari customer dan statusnya.      |
+| Kelola Transaksi     | Melihat dan mengelola data transaksi pembayaran dari customer.          |
+
+
+## 💈 2. Barber
+
+| Fitur                   | Deskripsi                                                                 |
+|-------------------------|--------------------------------------------------------------------------|
+| Melihat Daftar Booking  | Menampilkan daftar booking yang dialokasikan ke barber tersebut.        |
+| Konfirmasi Booking      | Menerima atau menolak permintaan booking dari customer.                 |
+| Mengatur Status Booking | Menandai status booking: *menunggu, diproses, selesai, dibatalkan*, dll. |
+
+
+## 👤 3. Customer
+
+| Fitur                                   | Deskripsi                                                                 |
+|----------------------------------------|--------------------------------------------------------------------------|
+| Melihat & Memilih Cabang               | Menampilkan daftar cabang yang tersedia untuk dipilih.                  |
+| Melihat & Memilih Layanan              | Menampilkan layanan (e.g. potong rambut, shaving, dsb) yang tersedia.   |
+| Melihat & Memilih Barber               | Memilih barber yang tersedia dari cabang yang dipilih.                  |
+| Melihat & Memilih Jadwal               | Menentukan tanggal dan waktu booking.                                   |
+| Memilih Metode Pembayaran              | Pilihan pembayaran langsung (tunai) atau metode lain jika tersedia.     |
+| Memilih Jenis Layanan (Tempat/Home)    | Menentukan apakah akan datang ke barbershop atau minta home service.    |
+| Melihat Riwayat Booking                | Melihat daftar booking sebelumnya dan status verifikasi dari barber.    |
+
 
