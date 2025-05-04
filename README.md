@@ -105,7 +105,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
   <h1>BARBERNEST</h1>
   <em>PLATFORM PEMESANAN DAN MANAJEMEN LAYANAN BARBERSHOP</em><br><br>
 
-<img src="public/img/unsulbar.png" alt="Logo" width="150"/><br><br>
+![Image](https://github.com/user-attachments/assets/3e809a21-1b25-4ef9-8e78-3bc97377b749)
 
 <strong>ARMAWAN</strong><br>
 D0223335<br>
@@ -114,8 +114,6 @@ FRAMEWORK WEB BASED<br>2025
 </p>
 
 <h3>Role dan Fitur</h3>
-
-
 
 -   CRUD layanan
 -   Kelola user (Barber, Customer)
