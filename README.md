@@ -60,8 +60,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
 
-<h2>BarberNest : Platform Booking dan Manajemen Layanan Barbershop</h2>
-![logo unsulbar](./public/img/BarberNest.drawio.png)
+<!-- <h2>BarberNest : Platform Booking dan Manajemen Layanan Barbershop</h2>
 <br>
 <p>
 <b>BarberNest</b> adalah platform web modern untuk layanan barbershop yang mendukung sistem multi-cabang, manajemen jadwal, booking online, dan layanan home service. Web ini dirancang untuk mempermudah pelanggan dalam memesan layanan potong rambut dari lokasi manapun, sekaligus membantu manajemen barbershop dalam mengatur operasional, pegawai, dan transaksi.
@@ -101,4 +100,103 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <ul>logout</ul>
 <br>
 <h4>Use Case Multirole</h4>
-<a href="https://drive.google.com/file/d/1sGajqAvbnBr5xD5BzpUWdD_ZmlZpxrul/view?usp=sharing">Lihat diagram di Google Drive</a>
+<a href="https://drive.google.com/file/d/1sGajqAvbnBr5xD5BzpUWdD_ZmlZpxrul/view?usp=sharing">Lihat diagram di Google Drive</a> -->
+<p align="center">
+  <h1>BARBERNEST</h1>
+  <em>PLATFORM PEMESANAN DAN MANAJEMEN LAYANAN BARBERSHOP</em><br><br>
+
+<img src="public/img/unsulbar.png" alt="Logo" width="150"/><br><br>
+
+<strong>ARMAWAN</strong><br>
+D0223335<br>
+FRAMEWORK WEB BASED<br>2025
+
+</p>
+
+<h3>Role dan Fitur</h3>
+
+
+
+-   CRUD layanan
+-   Kelola user (Barber, Customer)
+-   Lihat transaksi & statistik
+
+### ✂️ Barber
+
+-   Lihat layanan
+-   Terima / tolak booking
+-   Lihat jadwal
+
+### 👤 Customer
+
+-   Registrasi & Login
+-   Booking layanan
+-   Lihat riwayat pesanan
+
+---
+
+## 🗃️ Tabel-tabel Database beserta Field dan Tipe Datanya
+
+### 1. `users`
+
+| Field      | Tipe Data    | Keterangan                    |
+| ---------- | ------------ | ----------------------------- |
+| id         | BIGINT (AI)  | Primary Key                   |
+| name       | VARCHAR(100) | Nama pengguna                 |
+| email      | VARCHAR(100) | Email unik                    |
+| password   | VARCHAR(255) | Password terenkripsi          |
+| role       | ENUM         | `admin`, `barber`, `customer` |
+| created_at | TIMESTAMP    | Waktu dibuat                  |
+| updated_at | TIMESTAMP    | Waktu terakhir diubah         |
+
+---
+
+### 2. `services`
+
+| Field      | Tipe Data     | Keterangan             |
+| ---------- | ------------- | ---------------------- |
+| id         | BIGINT (AI)   | Primary Key            |
+| name       | VARCHAR(100)  | Nama layanan           |
+| price      | DECIMAL(10,2) | Harga layanan          |
+| duration   | INTEGER       | Durasi layanan (menit) |
+| created_at | TIMESTAMP     | Waktu dibuat           |
+| updated_at | TIMESTAMP     | Waktu terakhir diubah  |
+
+---
+
+### 3. `bookings`
+
+| Field        | Tipe Data   | Keterangan                                  |
+| ------------ | ----------- | ------------------------------------------- |
+| id           | BIGINT (AI) | Primary Key                                 |
+| user_id      | BIGINT      | FK ke `users` (customer)                    |
+| barber_id    | BIGINT      | FK ke `users` (barber)                      |
+| service_id   | BIGINT      | FK ke `services`                            |
+| booking_time | DATETIME    | Waktu booking                               |
+| status       | ENUM        | `pending`, `confirmed`, `done`, `cancelled` |
+| created_at   | TIMESTAMP   | Waktu dibuat                                |
+| updated_at   | TIMESTAMP   | Waktu terakhir diubah                       |
+
+---
+
+### 4. `transactions`
+
+| Field      | Tipe Data     | Keterangan                         |
+| ---------- | ------------- | ---------------------------------- |
+| id         | BIGINT (AI)   | Primary Key                        |
+| booking_id | BIGINT        | FK ke tabel `bookings`             |
+| amount     | DECIMAL(10,2) | Total pembayaran                   |
+| method     | VARCHAR(50)   | Metode bayar (cash, transfer, dll) |
+| paid_at    | DATETIME      | Waktu pembayaran                   |
+| created_at | TIMESTAMP     | Waktu dibuat                       |
+| updated_at | TIMESTAMP     | Waktu terakhir diubah              |
+
+---
+
+## 📸 Tampilan Aplikasi
+
+> Letakkan screenshot di folder `public/images` atau `storage/app/public`
+
+```markdown
+![Tampilan Admin Dashboard](public/images/dashboard.png)
+```
