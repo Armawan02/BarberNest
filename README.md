@@ -116,8 +116,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 </p>
 
 <h3>Role dan Fitur</h3>
-
-## 🧑‍💼 1. Admin
+1. Admin
 
 | Fitur                | Deskripsi                                                                       |
 | -------------------- | ------------------------------------------------------------------------------- |
@@ -222,6 +221,15 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 | paid_at        | TIMESTAMP NULL                  | Waktu pembayaran selesai                      |
 | created_at     | TIMESTAMP                       | Waktu dibuat                                  |
 | updated_at     | TIMESTAMP                       | Waktu terakhir diubah                         |
+
 <br>
 <h3>Jenis relasi dan tabel yang berelasi</h3>
 <br>
+
+| Tabel Asal   | Kolom FK   | Tabel Tujuan | Jenis Relasi | Keterangan                                        |
+| ------------ | ---------- | ------------ | ------------ | ------------------------------------------------- |
+| bookings     | user_id    | user         | Many-to-One  | Banyak booking dimiliki oleh satu customer (user) |
+| bookings     | branch_id  | branches     | Many-to-One  | Banyak booking berada di satu cabang              |
+| bookings     | service_id | services     | Many-to-One  | Banyak booking mengacu ke satu layanan            |
+| bookings     | barber_id  | user         | Many-to-One  | Banyak booking dilayani oleh satu barber (user)   |
+| transactions | booking_id | bookings     | One-to-One   | Satu transaksi hanya untuk satu booking           |
