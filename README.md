@@ -116,7 +116,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 </p>
 
 <h3>Role dan Fitur</h3>
-1. Admin
+<b>1. Admin</b>
 
 | Fitur                | Deskripsi                                                                       |
 | -------------------- | ------------------------------------------------------------------------------- |
@@ -126,7 +126,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 | Kelola Booking       | Melihat semua data booking yang masuk dari customer dan statusnya.              |
 | Kelola Transaksi     | Melihat dan mengelola data transaksi pembayaran dari customer.                  |
 
-## 💈 2. Barber
+<b>2. Barber</b>
 
 | Fitur                   | Deskripsi                                                                |
 | ----------------------- | ------------------------------------------------------------------------ |
@@ -134,7 +134,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 | Konfirmasi Booking      | Menerima atau menolak permintaan booking dari customer.                  |
 | Mengatur Status Booking | Menandai status booking: _menunggu, diproses, selesai, dibatalkan_, dll. |
 
-## 👤 3. Customer
+<b>3. Costumer</b>
 
 | Fitur                               | Deskripsi                                                              |
 | ----------------------------------- | ---------------------------------------------------------------------- |
@@ -148,7 +148,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 <br>
 <h3>Tabel-tabel database beserta field dan tipe datanya</h3>
-<br>
 
 ### 1. `users`
 
@@ -224,7 +223,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 <br>
 <h3>Jenis relasi dan tabel yang berelasi</h3>
-<br>
 
 | Tabel Asal   | Kolom FK   | Tabel Tujuan | Jenis Relasi | Keterangan                                        |
 | ------------ | ---------- | ------------ | ------------ | ------------------------------------------------- |
