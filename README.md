@@ -101,100 +101,20 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <br>
 <h4>Use Case Multirole</h4>
 <a href="https://drive.google.com/file/d/1sGajqAvbnBr5xD5BzpUWdD_ZmlZpxrul/view?usp=sharing">Lihat diagram di Google Drive</a> -->
+<h1 align="center">BarberNest</h1>
+<h2>Platform Booking dan Manajemen Layanan Barbershop</h2>
+<br>
+<h3 align="center"></h3>
 <p align="center">
-  <h1>BARBERNEST</h1>
-  <em>PLATFORM PEMESANAN DAN MANAJEMEN LAYANAN BARBERSHOP</em><br><br>
+  <img src="https://github.com/user-attachments/assets/3e809a21-1b25-4ef9-8e78-3bc97377b749" alt="Logo unsulbar" width="200"/>
+</p>
 
-![Image](https://github.com/user-attachments/assets/3e809a21-1b25-4ef9-8e78-3bc97377b749)
-
-<strong>ARMAWAN</strong><br>
-D0223335<br>
-FRAMEWORK WEB BASED<br>2025
-
+<p align="center">
+  <strong>ARMAWAN</strong><br/><br/>
+  <strong>D0223335</strong><br/><br/>
+  <strong>Framework Web Based</strong><br/><br/>
+  <strong>2025</strong>
 </p>
 
 <h3>Role dan Fitur</h3>
 
--   CRUD layanan
--   Kelola user (Barber, Customer)
--   Lihat transaksi & statistik
-
-### ✂️ Barber
-
--   Lihat layanan
--   Terima / tolak booking
--   Lihat jadwal
-
-### 👤 Customer
-
--   Registrasi & Login
--   Booking layanan
--   Lihat riwayat pesanan
-
----
-
-## 🗃️ Tabel-tabel Database beserta Field dan Tipe Datanya
-
-### 1. `users`
-
-| Field      | Tipe Data    | Keterangan                    |
-| ---------- | ------------ | ----------------------------- |
-| id         | BIGINT (AI)  | Primary Key                   |
-| name       | VARCHAR(100) | Nama pengguna                 |
-| email      | VARCHAR(100) | Email unik                    |
-| password   | VARCHAR(255) | Password terenkripsi          |
-| role       | ENUM         | `admin`, `barber`, `customer` |
-| created_at | TIMESTAMP    | Waktu dibuat                  |
-| updated_at | TIMESTAMP    | Waktu terakhir diubah         |
-
----
-
-### 2. `services`
-
-| Field      | Tipe Data     | Keterangan             |
-| ---------- | ------------- | ---------------------- |
-| id         | BIGINT (AI)   | Primary Key            |
-| name       | VARCHAR(100)  | Nama layanan           |
-| price      | DECIMAL(10,2) | Harga layanan          |
-| duration   | INTEGER       | Durasi layanan (menit) |
-| created_at | TIMESTAMP     | Waktu dibuat           |
-| updated_at | TIMESTAMP     | Waktu terakhir diubah  |
-
----
-
-### 3. `bookings`
-
-| Field        | Tipe Data   | Keterangan                                  |
-| ------------ | ----------- | ------------------------------------------- |
-| id           | BIGINT (AI) | Primary Key                                 |
-| user_id      | BIGINT      | FK ke `users` (customer)                    |
-| barber_id    | BIGINT      | FK ke `users` (barber)                      |
-| service_id   | BIGINT      | FK ke `services`                            |
-| booking_time | DATETIME    | Waktu booking                               |
-| status       | ENUM        | `pending`, `confirmed`, `done`, `cancelled` |
-| created_at   | TIMESTAMP   | Waktu dibuat                                |
-| updated_at   | TIMESTAMP   | Waktu terakhir diubah                       |
-
----
-
-### 4. `transactions`
-
-| Field      | Tipe Data     | Keterangan                         |
-| ---------- | ------------- | ---------------------------------- |
-| id         | BIGINT (AI)   | Primary Key                        |
-| booking_id | BIGINT        | FK ke tabel `bookings`             |
-| amount     | DECIMAL(10,2) | Total pembayaran                   |
-| method     | VARCHAR(50)   | Metode bayar (cash, transfer, dll) |
-| paid_at    | DATETIME      | Waktu pembayaran                   |
-| created_at | TIMESTAMP     | Waktu dibuat                       |
-| updated_at | TIMESTAMP     | Waktu terakhir diubah              |
-
----
-
-## 📸 Tampilan Aplikasi
-
-> Letakkan screenshot di folder `public/images` atau `storage/app/public`
-
-```markdown
-![Tampilan Admin Dashboard](public/images/dashboard.png)
-```
