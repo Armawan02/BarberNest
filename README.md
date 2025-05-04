@@ -148,7 +148,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 | Melihat Riwayat Booking             | Melihat daftar booking sebelumnya dan status verifikasi dari barber.   |
 
 <br>
-
 <h3>Tabel-tabel database beserta field dan tipe datanya</h3>
 <br>
 
@@ -161,7 +160,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 | email      | VARCHAR(150) UNIQUE               | Email user (unik)     |
 | password   | VARCHAR(255)                      | Password (hashed)     |
 | role       | ENUM(‘admin’,‘barber’,‘customer’) | Role/user type        |
-| phone      | VARCHAR(20) NULL                  | Nomor telepon         |
 | created_at | TIMESTAMP                         | Waktu dibuat          |
 | updated_at | TIMESTAMP                         | Waktu terakhir diubah |
 
@@ -224,79 +222,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 | paid_at        | TIMESTAMP NULL                  | Waktu pembayaran selesai                      |
 | created_at     | TIMESTAMP                       | Waktu dibuat                                  |
 | updated_at     | TIMESTAMP                       | Waktu terakhir diubah                         |
-
+<br>
 <h3>Jenis relasi dan tabel yang berelasi</h3>
 <br>
-
-### 1. `users`
-
-| Field      | Tipe Data                         | Keterangan            |
-| ---------- | --------------------------------- | --------------------- |
-| id         | BIGINT UNSIGNED AI                | Primary key           |
-| name       | VARCHAR(100)                      | Nama lengkap user     |
-| email      | VARCHAR(150) UNIQUE               | Email user (unik)     |
-| password   | VARCHAR(255)                      | Password (hashed)     |
-| role       | ENUM(‘admin’,‘barber’,‘customer’) | Role/user type        |
-| phone      | VARCHAR(20) NULL                  | Nomor telepon         |
-| created_at | TIMESTAMP                         | Waktu dibuat          |
-| updated_at | TIMESTAMP                         | Waktu terakhir diubah |
-
----
-
-### 2. `branches`
-
-| Field      | Tipe Data          | Keterangan            |
-| ---------- | ------------------ | --------------------- |
-| id         | BIGINT UNSIGNED AI | Primary key           |
-| name       | VARCHAR(100)       | Nama cabang           |
-| address    | TEXT               | Alamat lengkap cabang |
-| city       | VARCHAR(100)       | Kota cabang           |
-| created_at | TIMESTAMP          | Waktu dibuat          |
-| updated_at | TIMESTAMP          | Waktu terakhir diubah |
-
----
-
-### 3. `services`
-
-| Field       | Tipe Data          | Keterangan             |
-| ----------- | ------------------ | ---------------------- |
-| id          | BIGINT UNSIGNED AI | Primary key            |
-| name        | VARCHAR(100)       | Nama layanan           |
-| description | TEXT NULL          | Deskripsi layanan      |
-| price       | DECIMAL(10,2)      | Harga layanan          |
-| duration    | INT                | Durasi layanan (menit) |
-| created_at  | TIMESTAMP          | Waktu dibuat           |
-| updated_at  | TIMESTAMP          | Waktu terakhir diubah  |
-
----
-
-### 4. `bookings`
-
-| Field          | Tipe Data                                                         | Keterangan                                             |
-| -------------- | ----------------------------------------------------------------- | ------------------------------------------------------ |
-| id             | BIGINT UNSIGNED AI                                                | Primary key                                            |
-| user_id        | BIGINT UNSIGNED                                                   | FK → `users.id` (customer)                             |
-| branch_id      | BIGINT UNSIGNED                                                   | FK → `branches.id`                                     |
-| service_id     | BIGINT UNSIGNED                                                   | FK → `services.id`                                     |
-| barber_id      | BIGINT UNSIGNED                                                   | FK → `users.id` (role = barber)                        |
-| scheduled_at   | DATETIME                                                          | Tanggal & waktu booking                                |
-| service_method | ENUM(‘barber’,‘home’)                                             | Metode layanan: di tempat (`barber`) atau home service |
-| location       | TEXT NULL                                                         | Alamat home service (jika `service_method = home`)     |
-| status         | ENUM(‘pending’,‘confirmed’,‘in_progress’,‘completed’,‘cancelled’) | Status booking                                         |
-| created_at     | TIMESTAMP                                                         | Waktu dibuat                                           |
-| updated_at     | TIMESTAMP                                                         | Waktu terakhir diubah                                  |
-
----
-
-### 5. `transactions`
-
-| Field          | Tipe Data                       | Keterangan                                    |
-| -------------- | ------------------------------- | --------------------------------------------- |
-| id             | BIGINT UNSIGNED AI              | Primary key                                   |
-| booking_id     | BIGINT UNSIGNED                 | FK → `bookings.id`                            |
-| amount         | DECIMAL(12,2)                   | Total bayar (termasuk biaya layanan & ongkir) |
-| payment_method | VARCHAR(50)                     | Metode pembayaran (cash, online, dll.)        |
-| payment_status | ENUM(‘pending’,‘paid’,‘failed’) | Status pembayaran                             |
-| paid_at        | TIMESTAMP NULL                  | Waktu pembayaran selesai                      |
-| created_at     | TIMESTAMP                       | Waktu dibuat                                  |
-| updated_at     | TIMESTAMP                       | Waktu terakhir diubah                         |
