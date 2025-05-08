@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BarberNest;
+use App\Models\layanan;
 use Illuminate\Http\Request;
 
-class BarberNestController extends Controller
+class LayananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class BarberNestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BarberNest $barberNest)
+    public function show(layanan $layanan)
     {
         //
     }
@@ -42,7 +42,7 @@ class BarberNestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BarberNest $barberNest)
+    public function edit(layanan $layanan)
     {
         //
     }
@@ -50,7 +50,7 @@ class BarberNestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BarberNest $barberNest)
+    public function update(Request $request, layanan $layanan)
     {
         //
     }
@@ -58,7 +58,7 @@ class BarberNestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BarberNest $barberNest)
+    public function destroy(layanan $layanan)
     {
         //
     }

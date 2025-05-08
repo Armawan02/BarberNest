@@ -215,7 +215,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 | id             | BIGINT UNSIGNED AI              | Primary key                                   |
 | booking_id     | BIGINT UNSIGNED                 | FK → `bookings.id`                            |
 | amount         | DECIMAL(12,2)                   | Total bayar (termasuk biaya layanan & ongkir) |
-| payment_method | VARCHAR(50)                     | Metode pembayaran (cash, online, dll.)        |
 | payment_status | ENUM(‘pending’,‘paid’,‘failed’) | Status pembayaran                             |
 | paid_at        | TIMESTAMP NULL                  | Waktu pembayaran selesai                      |
 | created_at     | TIMESTAMP                       | Waktu dibuat                                  |
