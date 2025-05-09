@@ -163,70 +163,70 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ---
 
-### 2. `branches`
+### 2. `cabang`
 
 | Field      | Tipe Data          | Keterangan            |
 | ---------- | ------------------ | --------------------- |
 | id         | BIGINT UNSIGNED AI | Primary key           |
-| name       | VARCHAR(100)       | Nama cabang           |
-| address    | TEXT               | Alamat lengkap cabang |
-| city       | VARCHAR(100)       | Kota cabang           |
+| nama       | VARCHAR(100)       | Nama cabang           |
+| alamat     | TEXT               | Alamat lengkap cabang |
+| kota/kab   | VARCHAR(100)       | Kota cabang           |
 | created_at | TIMESTAMP          | Waktu dibuat          |
 | updated_at | TIMESTAMP          | Waktu terakhir diubah |
 
 ---
 
-### 3. `services`
+### 3. `layanan`
 
-| Field       | Tipe Data          | Keterangan             |
-| ----------- | ------------------ | ---------------------- |
-| id          | BIGINT UNSIGNED AI | Primary key            |
-| name        | VARCHAR(100)       | Nama layanan           |
-| description | TEXT NULL          | Deskripsi layanan      |
-| price       | DECIMAL(10,2)      | Harga layanan          |
-| duration    | INT                | Durasi layanan (menit) |
-| created_at  | TIMESTAMP          | Waktu dibuat           |
-| updated_at  | TIMESTAMP          | Waktu terakhir diubah  |
-
----
-
-### 4. `bookings`
-
-| Field          | Tipe Data                                                         | Keterangan                                             |
-| -------------- | ----------------------------------------------------------------- | ------------------------------------------------------ |
-| id             | BIGINT UNSIGNED AI                                                | Primary key                                            |
-| user_id        | BIGINT UNSIGNED                                                   | FK → `users.id` (customer)                             |
-| branch_id      | BIGINT UNSIGNED                                                   | FK → `branches.id`                                     |
-| service_id     | BIGINT UNSIGNED                                                   | FK → `services.id`                                     |
-| barber_id      | BIGINT UNSIGNED                                                   | FK → `users.id` (role = barber)                        |
-| scheduled_at   | DATETIME                                                          | Tanggal & waktu booking                                |
-| service_method | ENUM(‘barber’,‘home’)                                             | Metode layanan: di tempat (`barber`) atau home service |
-| location       | TEXT NULL                                                         | Alamat home service (jika `service_method = home`)     |
-| status         | ENUM(‘pending’,‘confirmed’,‘in_progress’,‘completed’,‘cancelled’) | Status booking                                         |
-| created_at     | TIMESTAMP                                                         | Waktu dibuat                                           |
-| updated_at     | TIMESTAMP                                                         | Waktu terakhir diubah                                  |
+| Field      | Tipe Data          | Keterangan             |
+| ---------- | ------------------ | ---------------------- |
+| id         | BIGINT UNSIGNED AI | Primary key            |
+| nama       | VARCHAR(100)       | Nama layanan           |
+| deskripsi  | TEXT NULL          | Deskripsi layanan      |
+| harga      | DECIMAL(10,2)      | Harga layanan          |
+| durasi     | INT                | Durasi layanan (menit) |
+| created_at | TIMESTAMP          | Waktu dibuat           |
+| updated_at | TIMESTAMP          | Waktu terakhir diubah  |
 
 ---
 
-### 5. `transactions`
+### 4. `pemesanan`
 
-| Field          | Tipe Data                       | Keterangan                                    |
-| -------------- | ------------------------------- | --------------------------------------------- |
-| id             | BIGINT UNSIGNED AI              | Primary key                                   |
-| booking_id     | BIGINT UNSIGNED                 | FK → `bookings.id`                            |
-| amount         | DECIMAL(12,2)                   | Total bayar (termasuk biaya layanan & ongkir) |
-| payment_status | ENUM(‘pending’,‘paid’,‘failed’) | Status pembayaran                             |
-| paid_at        | TIMESTAMP NULL                  | Waktu pembayaran selesai                      |
-| created_at     | TIMESTAMP                       | Waktu dibuat                                  |
-| updated_at     | TIMESTAMP                       | Waktu terakhir diubah                         |
+| Field          | Tipe Data                                          | Keterangan                                             |
+| -------------- | -------------------------------------------------- | ------------------------------------------------------ |
+| id             | BIGINT UNSIGNED AI                                 | Primary key                                            |
+| user_id        | BIGINT UNSIGNED                                    | FK → `users.id` (customer)                             |
+| cabang_id      | BIGINT UNSIGNED                                    | FK → `branches.id`                                     |
+| layanan_id     | BIGINT UNSIGNED                                    | FK → `services.id`                                     |
+| barber_id      | BIGINT UNSIGNED                                    | FK → `users.id` (role = barber)                        |
+| penjadwalan    | DATETIME                                           | Tanggal & waktu booking                                |
+| metode_layanan | ENUM(‘barber’,‘home’)                              | Metode layanan: di tempat (`barber`) atau home service |
+| lokasi         | TEXT NULL                                          | Alamat home service (jika `service_method = home`)     |
+| jumlah_bayar   | DECIMAL(10,2)                                      | Total bayar satu pemesanan                             |
+| status         | ENUM(‘menunggu’,‘diterima’,‘selesai’,‘dibatalkan’) | Status booking                                         |
+| created_at     | TIMESTAMP                                          | Waktu dibuat                                           |
+| updated_at     | TIMESTAMP                                          | Waktu terakhir diubah                                  |
+
+---
+
+### 5. `transaksi`
+
+| Field             | Tipe Data                       | Keterangan               |
+| ----------------- | ------------------------------- | ------------------------ |
+| id                | BIGINT UNSIGNED AI              | Primary key              |
+| pemesanan_id      | BIGINT UNSIGNED                 | FK → `bookings.id`       |
+| status_pembayaran | ENUM(‘pending’,‘paid’,‘failed’) | Status pembayaran        |
+| paid_at           | TIMESTAMP NULL                  | Waktu pembayaran selesai |
+| created_at        | TIMESTAMP                       | Waktu dibuat             |
+| updated_at        | TIMESTAMP                       | Waktu terakhir diubah    |
 
 <br>
 <h3>Jenis relasi dan tabel yang berelasi</h3>
 
-| Tabel Asal   | Kolom FK   | Tabel Tujuan | Jenis Relasi | Keterangan                                        |
-| ------------ | ---------- | ------------ | ------------ | ------------------------------------------------- |
-| bookings     | user_id    | user         | Many-to-One  | Banyak booking dimiliki oleh satu customer (user) |
-| bookings     | branch_id  | branches     | Many-to-One  | Banyak booking berada di satu cabang              |
-| bookings     | service_id | services     | Many-to-One  | Banyak booking mengacu ke satu layanan            |
-| bookings     | barber_id  | user         | Many-to-One  | Banyak booking dilayani oleh satu barber (user)   |
-| transactions | booking_id | bookings     | One-to-One   | Satu transaksi hanya untuk satu booking           |
+| Tabel Asal | Kolom FK     | Tabel Tujuan | Jenis Relasi | Keterangan                                        |
+| ---------- | ------------ | ------------ | ------------ | ------------------------------------------------- |
+| pemesanan  | user_id      | users        | Many-to-One  | Banyak booking dimiliki oleh satu customer (user) |
+| pemesanan  | cabang_id    | cabang       | Many-to-One  | Banyak booking berada di satu cabang              |
+| pemesanan  | layanan_id   | layanan      | Many-to-One  | Banyak booking mengacu ke satu layanan            |
+| pemesanan  | barber_id    | users        | Many-to-One  | Banyak booking dilayani oleh satu barber (user)   |
+| transaksi  | pemesanan_id | pemesanan    | One-to-One   | Satu transaksi hanya untuk satu booking           |
