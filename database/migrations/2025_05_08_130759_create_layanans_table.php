@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('layanan', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-    $table->text('deskripsi')->nullable();
-    $table->decimal('harga');
-    $table->integer('durasi');
+            $table->text('deskripsi')->nullable();
+            $table->decimal('harga');
+            $table->integer('durasi');
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -45,4 +46,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function pemesananSebagaiCustomer()
+    {
+        return $this->hasMany(Pemesanan::class, 'user_id');
+    }
+
+    public function pemesananSebagaiBarber()
+    {
+        return $this->hasMany(Pemesanan::class, 'barber_id');
+    }
+    public function layanan()
+{
+    return $this->belongsToMany(Layanan::class, 'barber_layanan', 'barber_id', 'layanan_id');
+}
+
 }
