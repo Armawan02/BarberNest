@@ -8,7 +8,7 @@ class cabang extends Model
 {
     protected $table = 'cabang';
 
-    protected $fillable = ['nama','alamat','kota/kab'];
+    protected $guarded = [];
 
     public function pemesanan()
     {

@@ -2,63 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Dashboard
     public function index()
     {
         return view('admin.dashboard');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // 1. Index
+    public function usersIndex()
     {
-        //
+        $users = User::orderBy('created_at','desc')->paginate(10);
+        return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // 2. Create form
+    public function usersCreate()
     {
-        //
+        return view('admin.users.create');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // 3. Store
+    public function usersStore(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name'  => 'required|string|max:50',
+            'email' => 'required|email|unique:users,email',
+            'role'  => 'required|in:admin,barber,customer',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        $data['password'] = Hash::make($data['password']);
+        User::create($data);
+        return redirect()->route('admin.users.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // 4. Show
+    public function usersShow(User $user)
     {
-        //
+        return view('admin.users.show', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // 5. Edit form
+    public function usersEdit(User $user)
     {
-        //
+        return view('admin.users.edit', compact('user'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // 6. Update
+    public function usersUpdate(Request $request, User $user)
     {
-        //
+        $rules = [
+            'name' => 'required|string|max:50',
+            'role' => 'required|in:admin,barber,customer',
+        ];
+        if ($request->email !== $user->email) {
+            $rules['email'] = 'required|email|unique:users,email';
+        }
+        if ($request->filled('password')) {
+            $rules['password'] = 'string|min:6|confirmed';
+        }
+        $data = $request->validate($rules);
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+        $user->update($data);
+        return redirect()->route('admin.users.index');
+    }
+
+    // 7. Destroy
+    public function usersDestroy(User $user)
+    {
+        $user->delete();
+        return back();
     }
 }

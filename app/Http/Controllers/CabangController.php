@@ -12,7 +12,8 @@ class CabangController extends Controller
      */
     public function index()
     {
-        //
+        $semuaCabang = cabang::all();
+        return view('admin.cabangIndex', compact('semuaCabang'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CabangController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.cabangCreate');
     }
 
     /**
@@ -28,7 +29,14 @@ class CabangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validasiData = $request->validate([
+            'nama' => 'required|max:50',
+            'alamat' => 'required|max:50',
+            'kota/kab' => 'required|max:50',
+        ]);
+
+        cabang::create($validasiData);
+        return redirect()->route('admin.cabangIndex');
     }
 
     /**
@@ -36,7 +44,7 @@ class CabangController extends Controller
      */
     public function show(cabang $cabang)
     {
-        //
+        return view('admin.cabangShow',compact('cabang'));
     }
 
     /**
@@ -44,7 +52,7 @@ class CabangController extends Controller
      */
     public function edit(cabang $cabang)
     {
-        //
+        return view('admin.cabangEdit', compact('cabang'));
     }
 
     /**
@@ -52,7 +60,13 @@ class CabangController extends Controller
      */
     public function update(Request $request, cabang $cabang)
     {
-        //
+        $validasiData = $request->validate([
+            'nama' => 'required|max:50',
+            'alamat' => 'required|max:50',
+            'kota/kab' => 'required|max:50',
+        ]);
+        $cabang->update($validasiData);
+        return redirect()->route('admin.cabangIndex');
     }
 
     /**
@@ -60,6 +74,7 @@ class CabangController extends Controller
      */
     public function destroy(cabang $cabang)
     {
-        //
+        $cabang->delete();
+        return redirect()->route('admin.cabangIndex');
     }
 }

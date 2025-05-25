@@ -1,18 +1,26 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarberController;
+use App\Http\Controllers\BookingSaya;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CabangController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('master');
 });
 
-Route::get('/dashboardCostumer', function () {
-    return view('customer.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::resource('users',AdminController::class);
+    Route::get('/barber/dashboard', [BarberController::class, 'index'])->name('barber.dashboard');
+    Route::get('/customer/dashboard', [CustomerController::class, 'index'])->name('customer.dashboard');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -20,10 +28,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'role:admin'])->get('/admin', [AdminController::class, 'index']);
-Route::middleware(['auth','role:barber'])->get('/barber',[BarberController::class,'index']);
-Route::middleware(['auth', 'role:customer'])->get('/customer', [CustomerController::class, 'index']);
-
-
-    
 require __DIR__.'/auth.php';

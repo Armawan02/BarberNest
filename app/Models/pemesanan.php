@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class pemesanan extends Model
 {
     protected $table = 'pemesanan';
-    protected $fillable = ['user_id','cabang_id','layanan_id','barber_id','penjadwalan','metode_layanan','lokasi','jumlah_bayar','status'];
+    protected $guarded = [];
 
     public function customer()
     {
