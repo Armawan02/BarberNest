@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class BarberController extends Controller
 {
@@ -11,7 +14,12 @@ class BarberController extends Controller
      */
     public function index()
     {
-        return view('barber.dashboard');
+        $riwayatBooking = pemesanan::where('barber_id', Auth::id())
+        ->with(['cabang', 'layanan', 'customer']) // pastikan relasi ada
+        ->latest()
+        ->paginate(10);
+
+    return view('barber.dashboard', compact('riwayatBooking'));
     }
 
     /**
@@ -49,10 +57,20 @@ class BarberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+
+public function updateStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:menunggu,diterima,selesai,dibatalkan',
+    ]);
+
+    $pemesanan = pemesanan::findOrFail($id);
+
+    $pemesanan->status = $request->status;
+    $pemesanan->save();
+
+    return back()->with('success', 'Status berhasil diperbarui.');
+}
 
     /**
      * Remove the specified resource from storage.

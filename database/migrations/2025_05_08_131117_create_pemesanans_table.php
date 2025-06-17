@@ -19,8 +19,7 @@ return new class extends Migration
             $table->foreignId('barber_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->dateTime('penjadwalan'); // waktu booking
             $table->enum('metode_layanan', ['barbershop', 'rumah']);
-            $table->text('lokasi'); // alamat customer (jika home service)
-            $table->decimal('jumlah_bayar', 10, 2); // harga dari layanan saat booking
+            $table->text('lokasi')->nullable(); // alamat customer (jika home service)
             $table->enum('status', ['menunggu', 'diterima', 'selesai', 'dibatalkan'])->default('menunggu');
             $table->timestamps();
 });

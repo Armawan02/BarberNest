@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cabang;
+use App\Models\layanan;
+use App\Models\pemesanan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -11,7 +16,17 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('customer.dashboard');
+        $semuaBarber = User::where('role', 'barber')->get();
+        $semuaCabang = Cabang::all();
+        $semuaLayanan = Layanan::all();
+
+        // fix: gunakan paginate agar bisa menggunakan links()
+        $riwayatBooking = Pemesanan::where('user_id', Auth::id())
+            ->with(['cabang', 'layanan', 'barber'])
+            ->latest()
+            ->paginate(10);
+
+        return view('customer.dashboard', compact('semuaCabang', 'semuaLayanan', 'semuaBarber', 'riwayatBooking'));
     }
 
     /**
@@ -27,7 +42,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'cabang' => 'required|exists:cabang,id',
+            'layanan_id' => 'required|exists:layanan,id',
+            'barber_id' => 'nullable|exists:users,id',
+            'penjadwalan' => 'required|date',
+            'metode_layanan' => 'required|string',
+            'lokasi' => 'nullable|string',
+        ]);
+
+        Pemesanan::create([
+            'user_id' => Auth::id(),
+            'cabang_id' => $request->cabang,
+            'layanan_id' => $request->layanan_id,
+            'barber_id' => $request->barber_id,
+            'penjadwalan' => $request->penjadwalan,
+            'metode_layanan' => $request->metode_layanan,
+            'lokasi' => $request->lokasi,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Pemesanan berhasil disimpan!');
     }
 
     /**

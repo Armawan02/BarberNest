@@ -20,5 +20,4 @@
     </select><br><br>
     <button type="submit">Simpan</button>
 </form>
-
 @endsection

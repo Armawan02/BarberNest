@@ -12,7 +12,8 @@ class LayananController extends Controller
      */
     public function index()
     {
-        //
+        $semuaLayanan = layanan::all();
+        return view('customer.dashboard',compact('semuaLayanan'));
     }
 
     /**

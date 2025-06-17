@@ -47,10 +47,10 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="">Kelola User</a></li>
-                    <li><a href="">Kelola Cabang</a></li>
-                    <li><a href="">Kelola Layanan</a></li>
-                    <li><a href="">Kelola Booking</a></li>
+                    <li><a href="#daftarCabang">Daftar Cabang</a></li>
+                    <li><a href="#daftarLayanan">Daftar Layanan</a></li>
+                    <li><a href="#pemesanan">Pemesanan</a></li>
+                    <li><a href="#riwayat">Riwayat</a></li>
                     @if (Route::has('login'))
                     @auth
                     <li><a href="{{ route('profile.edit') }}">{{ Auth::user()->name }}</a></li>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\cabang;
+use App\Models\layanan;
+use App\Models\pemesanan;
 use Illuminate\Http\Request;
 
 class CabangController extends Controller
@@ -13,7 +15,7 @@ class CabangController extends Controller
     public function index()
     {
         $semuaCabang = cabang::all();
-        return view('admin.cabangIndex', compact('semuaCabang'));
+        return view('admin.show', compact('semuaCabang'));
     }
 
     /**
@@ -35,7 +37,9 @@ class CabangController extends Controller
             'kota/kab' => 'required|max:50',
         ]);
 
-        cabang::create($validasiData);
+        cabang::create($validasiData['nama']);
+        layanan::create($validasiData['nama']);
+        pemesanan::create($validasiData['alamat']);
         return redirect()->route('admin.cabangIndex');
     }
 
