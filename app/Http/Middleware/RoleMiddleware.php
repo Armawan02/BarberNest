@@ -8,10 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (!Auth::check() || Auth::user()->role !== $role) {
-            abort(403, 'Akses Ditolak');
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        $userRole = Auth::user()->role;
+
+        if (!in_array($userRole, $roles)) {
+            abort(403, 'Akses Ditolak: Anda tidak memiliki izin.');
         }
 
         return $next($request);

@@ -23,7 +23,7 @@
                 <td>{{ ucfirst($booking->metode_layanan) }}</td>
                 <td>{{ $booking->lokasi ?? '-' }}</td>
                 <td>
-                    <form action="{{ route('barber.pemesanan.updateStatus', $booking->id) }}" method="POST">
+                    <form action="{{ route('pemesanan.updateStatus', $booking->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
